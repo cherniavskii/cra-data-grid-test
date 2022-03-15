@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import { DataGrid, GridToolbarContainer, GridToolbarExport } from '@mui/x-data-grid';
 
-function App() {
+function CustomToolbar() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GridToolbarContainer>
+      <GridToolbarExport />
+    </GridToolbarContainer>
   );
 }
 
-export default App;
+export default function ExportCustomToolbar() {
+  const data = {
+    columns: [{ field: 'id' }],
+    rows: [
+      { id: 1 }
+    ]
+  }
+
+  return (
+    <div style={{ height: 300, width: '100%' }}>
+      <DataGrid
+        {...data}
+        components={{
+          Toolbar: CustomToolbar,
+        }}
+      />
+    </div>
+  );
+}
